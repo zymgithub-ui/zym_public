@@ -1,0 +1,56 @@
+预约设置
+
+Controller
+通过POIUtils 拿到List<String[]> 
+遍历List 遍历String  
+转成List<OrderSetting> 
+
+放数据库中
+success or fail 
+
+
+@service(interface=OrdersettingServiceImpl.class)
+@Transactional
+
+
+dao层
+  查,>0改(number) else add
+
+日历组件
+
+只展示每个月的数据
+年月传给后台2019-11  yyyy-MM  
+获取到每月的数据(Ordersetting)
+后台将 月日string  通过service 转为List<Map> 
+
+service调用dao 将List<OrderSetting>  转为 List<Map> 
+
+
+dao
+@Select(select * from ordersetting where orderdate between '2019-11-1' and '2019-11-31')
+OrderSetting getOrgerSettingByMonth(Map map)
+
+
+点击设置->弹窗(有输入框)
+	针对某一天设置当天可预约人数
+小于等于当天时间的,不可以进行设置
+	预约设置的方法参数	dayobject.day
+
+this.$prompt("请输入可预约人数","提示",{
+inputPattern:
+inputerrorMessage:只能输入正整数
+}).then(({value})=>{//输入的值封装进value
+
+//异步请求
+post请求体中,两个参数 
+number: 
+orderdate:
+成功后 调用初始化日历控件(传递年月日)
+
+
+}).catch(()={
+
+
+})
+
+
